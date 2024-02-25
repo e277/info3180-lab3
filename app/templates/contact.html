@@ -1,0 +1,46 @@
+{%extends "base.html" %} {% block main %}
+
+<div class="contact-form">
+  <h1>Contact Form</h1>
+  <hr />
+  <p>Fill in this form to contact the site owners.</p>
+
+  {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %}
+  <ul class="flashes">
+    {% for category, message in messages %}
+    <li class="flash {{ category }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+
+  <form action="/contact" method="post">
+
+    {{ form.csrf_token }}
+
+    <div class="form-group">
+      {{ form.name.label }} <span>(Required)</span> <br>
+      {{ form.name(size=40) }} 
+      {% for error in form.name.errors %} <span class="error">{{ error }}</span> {% endfor %}
+    </div>
+    <div class="form-group">
+      {{ form.email.label }} <span>(Required)</span> <br>
+      {{ form.email(size=40) }} 
+      {% for error in form.email.errors %} <span class="error">{{ error }}</span> {% endfor %}
+    </div>
+    <div class="form-group">
+      {{ form.subject.label }} <span>(Required)</span> <br>
+      {{ form.subject(size=40) }}
+      {% for error in form.subject.errors %} <span class="error">{{ error }}</span> {% endfor %}
+    </div>
+    <div class="form-group">
+      {{ form.message.label }} <span>(Required)</span> <br>
+      {{ form.message }}
+      {% for error in form.message.errors %} <span class="error">{{ error }}</span> {% endfor %}
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Send</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
