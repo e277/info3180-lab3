@@ -18,22 +18,26 @@
     {{ form.csrf_token }}
 
     <div class="form-group">
-      {{ form.name.label }} <span>(Required)</span> <br>
+      {{ form.name.label }} <span class="required">(Required)</span> <br>
+      <p>Please enter your full name</p>
       {{ form.name(size=40) }} 
       {% for error in form.name.errors %} <span class="error">{{ error }}</span> {% endfor %}
     </div>
     <div class="form-group">
-      {{ form.email.label }} <span>(Required)</span> <br>
+      {{ form.email.label }} <span class="required">(Required)</span> <br>
+      <p>Please enter your e-mail address</p>
       {{ form.email(size=40) }} 
       {% for error in form.email.errors %} <span class="error">{{ error }}</span> {% endfor %}
     </div>
     <div class="form-group">
-      {{ form.subject.label }} <span>(Required)</span> <br>
+      {{ form.subject.label }} <span class="required">(Required)</span> <br>
+      <p>Please enter the subject of the message</p>
       {{ form.subject(size=40) }}
       {% for error in form.subject.errors %} <span class="error">{{ error }}</span> {% endfor %}
     </div>
     <div class="form-group">
-      {{ form.message.label }} <span>(Required)</span> <br>
+      {{ form.message.label }} <span class="required">(Required)</span> <br>
+      <p>Please enter your message</p>
       {{ form.message }}
       {% for error in form.message.errors %} <span class="error">{{ error }}</span> {% endfor %}
     </div>

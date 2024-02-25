@@ -1,5 +1,7 @@
 from app import app
+from app import mail
 from flask import render_template, request, redirect, url_for, flash
+from flask_mail import Message
 
 from app.forms import ContactForm
 
@@ -64,7 +66,16 @@ def contact():
     form = ContactForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            flash('contact form submitted successfully', 'success')
+            
+            msg = Message(
+                request.form.get('subject'),
+                sender=(request.form.get('name'), request.form.get('email')),
+                recipients=[app.config['MAIL_USERNAME']]
+            )
+            msg.body = request.form.get('message')
+            mail.send(msg)
+            
+            flash('Contact form submitted successfully!', 'success')
             return redirect(url_for('home'))
         else:
             flash_errors(form)
